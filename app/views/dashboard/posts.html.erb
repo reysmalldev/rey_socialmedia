@@ -1,0 +1,10 @@
+<%= turbo_frame_tag "posts" do %>
+	<% @posts.each_with_index do |post, post_i| %>
+		<div class="w-1/2 h-1/2 py-3 <%= post_i % 2 == 0  ? 'pr-2' : 'pl-2' %>">
+			<%= render Components::Card do |card| %>
+				<%= card.title 	 { post.title } %>
+				<%= card.content { post.content } %>
+			<% end %>
+		</div>
+	<% end %>
+<% end %>

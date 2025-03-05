@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+    --color-back: #0E0E10;
+
+    --color-radial-0: #000;
+    --color-radial-48: #020107; /* Opacity 52% */
+    --color-radial-100: #635D8E;
+
+    --color-brand-left: #AE67FA;
+    --color-brand-right: #F49867; /* Stop 97 */
+
+    --color-elipse: #C689F9;
+    --color-button-border: #C584F5;
+
+    --color-post-wrapper: #161515;
+    --color-post-title: #6C49F8;
+}
+
+html, body {
+    @apply w-full h-full;
+}
+
+body {
+    @apply bg-no-repeat bg-cover
+    /* @apply bg-radial-[at_50%_75%] from-sky-200 via-blue-400 to-indigo-900 to-90%; */
+}
+
+.elipse {
+    @apply -z-1 absolute -top-[132px] -left-[117px] bg-elipse rounded-full blur-[400px] opacity-30 w-[717px] h-[691px];
+}
+
+.elipse2 {
+    @apply -z-1 absolute top-[442.59px] left-[11px] w-[824px] h-[448.41px];
+    background-image: radial-gradient(closest-side, rgba(197, 137, 249, 0.4), #0E0E10)
+}
+
+.card {
+    @apply flex flex-col items-center grow-1 bg-black/50 rounded-t-2xl w-full h-full p-3;
+}
+
+.card-title {
+    @apply z-2 text-white text-center;
+}
+
+.card-body {
+    @apply z-2 text-white text-start w-full h-full opacity-100;
+}
+
+.nav {
+    @apply flex items-center h-20  justify-between px-4;
+}
+
+.nav-brand {
+    @apply bg-gradient-to-r bg-clip-text text-transparent from-brand-left to-brand-right w-fit max-h-auto text-2xl;
+}
+
+.nav-item {
+    @apply w-fit max-h-auto text-xl text-white mx-8;
+}
+
+.button {
+    @apply border-1 border-button-border text-white rounded-sm px-4 py-1;
+}
+
+.post-title {
+    @apply text-post-title text-xl;
+}
