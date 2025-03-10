@@ -212,9 +212,9 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
-    phlex (2.0.2)
-    phlex-rails (2.0.2)
-      phlex (~> 2.0.2)
+    phlex (2.1.1)
+    phlex-rails (2.1.2)
+      phlex (~> 2.1.0)
       railties (>= 6.1, < 9)
     pp (0.6.2)
       prettyprint
@@ -232,7 +232,7 @@ GEM
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (3.1.10)
+    rack (3.1.11)
     rack-session (2.1.0)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -408,7 +408,7 @@ DEPENDENCIES
   jsbundling-rails
   kamal
   pg (~> 1.1)
-  phlex-rails (~> 2.0)
+  phlex-rails (~> 2.1)
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.1)
