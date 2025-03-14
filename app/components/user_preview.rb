@@ -31,14 +31,16 @@ class Components::UserPreview < Components::Base
     h4(class: "text-#{@font_size} text-center h-fit", &)
   end
 
-  def avatar(avatar, circle_size: 'xl', size: 20, &)
+  def avatar(avatar, circle_size: '2xl', size: 20, &)
     classes = 'flex items-center justify-center text-wrap relative rounded-full overflow-hidden'
 
     case circle_size
     when 'md'
       classes += ' w-[30px] h-[30px] '
-    else
+    when 'xl'
       classes += ' w-[50px] h-[50px] '
+    else
+      classes += ' w-[75px] h-[75px] '
     end
 
     if @is_created
@@ -47,11 +49,13 @@ class Components::UserPreview < Components::Base
       classes += ' me-2'
     end
 
+    classes += ' border border-stone-50 p-2' unless avatar&.attached?
+
     div(class: classes.strip) do
       if avatar&.attached?
         img(class: "absolute", src: url_for(avatar.blob))
       else
-        i(class: "m-0 -mt-2 w-#{size} h-#{size}", data: {lucide: "user-round-x"})
+        i(class: "m-0 -mt-2 size-50", data: {lucide: "user-round-x"})
       end
     end
   end

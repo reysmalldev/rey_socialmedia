@@ -1,49 +1,33 @@
 # The Odin Project Final Project
 
-### But I improved the challenge
-## My Project will use a NextJS for front-end and Rails fro back. So I will use Rails in API mode.
-
-    [Ok]- Use PostgreSQL for your database from the beginning (not SQLite3), that way your deployment will go much more smoothly.
-        - Done
+    [Ok] - Use PostgreSQL for your database from the beginning (not SQLite3), that way your deployment will go much more smoothly.
     
-    [Todo]- Users must sign in to see anything except the sign in page.
-        - Done
+    [Ok] - Users must sign in to see anything except the sign in page.
 
-    [Todo]- User sign-in should use the Devise gem. Devise gives you all sorts of helpful methods so you no longer have to write your own user passwords, sessions, and #current_user methods. See the Railscast on Devise (which uses Rails 3) for a step-by-step introduction. The docs will be fully current.
+    [Ok] - User sign-in should use the Devise gem. Devise gives you all sorts of helpful methods so you no longer have to write your own user passwords, sessions, and #current_user methods. See the Railscast on Devise (which uses Rails 3) for a step-by-step introduction. The docs will be fully current.
         - Done with Rails 8 auth system
 
-    [Todo]- Users can send follow requests to other users.
-        - Done
+    [Ok] - Users can send follow requests to other users.
 
-    [Todo]- Users can create posts (begin with text only).
-        - Done
+    [Ok] - Users can create posts (begin with text only).
 
-    [Todo]- Users can like posts.
-        - Done
+    [Ok]- Users can like posts.
 
-    [Todo]- Users can comment on posts.
-        - Done
+    [Ok] - Users can comment on posts.
 
-    [Todo]- Posts should always display the post content, author, comments, and likes.
-        - Done
+    [Ok]- Posts should always display the post content, author, comments, and likes.
 
-    [Todo]- There should be an index page for posts, which shows all the recent posts from the current user and users they are following.
-        - Done
+    [Ok] - There should be an index page for posts, which shows all the recent posts from the current user and users they are following.
 
-    [Todo]- Users can create a profile with a profile picture. You may be able to get the profile picture when users sign in using OmniAuth. If this isn’t the case you can use Gravatar to generate the photo.
+    [Ok] - Users can create a profile with a profile picture. You may be able to get the profile picture when users sign in using OmniAuth. If this isn’t the case you can use Gravatar to generate the photo.
         Done with ActiveStorage
 
-    [Todo]- A user’s profile page should contain their profile information, profile photo, and posts.
-        Done but need improve
+    [Partial] - A user’s profile page should contain their profile information, profile photo, and posts.
 
-    [Todo]- There should be an index page for users, which shows all users and buttons for sending follow requests to users the user is not already following or have a pending request.
-        Done
+    [Partial] - There should be an index page for users, which shows all users and buttons for sending follow requests to users the user is not already following or have a pending request.
 
-    [Todo]- Set up a mailer to send a welcome email when a new user signs up. Use the Letter Opener gem to test it in development mode.
-        API - Done [Devlopment]
+    [Todo] - Set up a mailer to send a welcome email when a new user signs up. Use the Letter Opener gem to test it in development mode.
 
-    [Todo]- Deploy your App to a hosting provider.
-        - To Do
+    [Todo] - Deploy your App to a hosting provider.
     
-    [Todo]- Set up an email provider and start sending real emails.
-        - To Do
+    [Todo] - Set up an email provider and start sending real emails.

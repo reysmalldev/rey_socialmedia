@@ -36,6 +36,7 @@ Rails.application.routes.draw do
         get "/", to: "index"
         post "/:id", to: "show", as: :show
         get "/new", to: "new"
+        post "/", to: "create", as: :create
 
         namespace :like do
           post "/:user_post_id",         to: "create"

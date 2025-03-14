@@ -65,7 +65,7 @@ class Dashboard::User::PostsController < ApplicationController
   end
 
   def friends_posts
-    @friend_posts = [0...5].map { |_| Current.user.friends.sample.posts.sample }.compact_blank
+    @friend_posts = [0...5].map { |_| Current.user.friends&.sample&.posts&.sample }.compact_blank
   end
 
   def show

@@ -1,0 +1,9 @@
+<div class="flex flex-col">
+  <h1 class="post-title">RailsSocialMedia Users</h1>
+  <% @users.each do |u| %>
+    <%= render Components::UserPreview.new() do |p| %>
+      <%= p.avatar u.config.avatar %>
+      <%= p.text { u.username } %>
+    <% end %>
+  <% end %>
+</div>
