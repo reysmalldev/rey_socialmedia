@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_28_122220) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_12_134121) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -69,6 +69,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_28_122220) do
     t.index ["user_id"], name: "index_user_friend_ships_on_user_id"
   end
 
+  create_table "user_post_comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "user_post_id", null: false
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_post_comments_on_user_id"
+    t.index ["user_post_id"], name: "index_user_post_comments_on_user_post_id"
+  end
+
   create_table "user_post_likes", force: :cascade do |t|
     t.string "like_type"
     t.bigint "user_post_id", null: false
@@ -102,6 +112,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_28_122220) do
   add_foreign_key "user_configs", "users"
   add_foreign_key "user_friend_ships", "users"
   add_foreign_key "user_friend_ships", "users", column: "target_user_id"
+  add_foreign_key "user_post_comments", "user_posts"
+  add_foreign_key "user_post_comments", "users"
   add_foreign_key "user_post_likes", "user_posts"
   add_foreign_key "user_post_likes", "users"
   add_foreign_key "user_posts", "users"

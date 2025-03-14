@@ -1,0 +1,39 @@
+<div class="flex justify-around bg-post-wrapper h-full m-4 p-3">
+	<div class="flex flex-col">
+		<h1 class="post-title">Your Friends</h1>
+		<div class="flex flex-col">
+			<% @friends.each do |f| %>
+				<%= render 'friend', user: f %>
+			<% end %>
+		</div>
+	</div>
+	<div class="flex flex-col ms-3 me-3">
+		<h1 class="post-title">Received Requests</h1>
+		<div class="flex">
+			<div class="flex">
+				<% @received_requests.each do |u| %>
+					<%= render 'pending', user: u %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	<div class="flex flex-col">
+		<h1 class="post-title">Send Requests</h1>
+		<div class="flex">
+			<div class="flex flex-col">
+				<%= turbo_frame_tag 'add_friend' do  %>
+					<%= link_to dashboard_user_friend_ship_new_path, class: "button flex text-white mt-2" do %>
+						<i data-lucide="user-round-plus"></i>
+						<h2 class="text-start ms-1">Add Friend</h2>
+					<% end %>
+				<% end %>
+				<div class="flex flex-col">
+					<h1 class="post-title mt-2">Pending Sent Requests</h1>
+					<% @requested_users.each do |r| %>
+						<%= render 'pending', user: r %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

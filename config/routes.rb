@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
-  namespace :user do
-    resources :posts
-  end
   resource :session
   resources :passwords, param: :token
+  resources :registration, only: %w[index create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -17,7 +15,39 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   namespace :dashboard do
     get "/", to: "index", as: :index
-    get "/posts", to: "posts", as: :posts
+
+    namespace :user do
+      resource :settings, only: %w[edit update]
+
+      namespace :friend_ship do
+        get "/", to: "index"
+        get "/new", to: "new"
+        post "/create", to: "create"
+        post "/search", to: "search_user"
+
+        post "/accept", to: "accept_friendship"
+      end
+
+      # resources :posts
+      get "/recent_posts", to: "posts#posts", as: :recent_posts
+      get "/friends_posts", to: "posts#friends_posts", as: :friends_posts
+
+      namespace :posts do
+        get "/", to: "index"
+        post "/:id", to: "show", as: :show
+        get "/new", to: "new"
+
+        namespace :like do
+          post "/:user_post_id",         to: "create"
+          get "/count/:id", to: "counter", as: :counter
+        end
+
+        namespace :comment do
+          post "/:user_post_id", to: "index"
+          post "/create/:user_post_id", to: "create", as: :create
+        end
+      end
+    end
   end
 
   # get "/", to: "dashboard#root"

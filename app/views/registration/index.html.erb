@@ -1,0 +1,40 @@
+<div class="mx-auto md:w-2/3 w-full">
+	<% if (errors = flash[:errors]) %>
+		<% errors.each do |e| %>
+			<p class="py-2 px-3 bg-red-50 mb-5 text-red-500 font-medium rounded-lg inline-block" id="alert"><%= e %></p>
+		<% end %>
+
+	<% end %>
+
+	<h1 class="font-bold text-4xl">Sign in</h1>
+
+
+	<%= form_with url: registration_index_path, class: "contents" do |form| %>
+
+		<%= render Components::Input.new do |input| %>
+			<%= input.icon("user") %>
+			<%= input.field(name: "user[username]", id: "user[username]", placeholder: "Enter your username", type: "text") %>
+		<% end %>
+
+		<%= render Components::Input.new do |input| %>
+			<%= input.icon("mail") %>
+			<%= input.field(name: "user[email_address]", id: "user[email_adress]", placeholder: "Enter your best e-mail", type: "text") %>
+		<% end %>
+
+		<%= render Components::Input.new do |input| %>
+			<%= input.icon("rectangle-ellipsis") %>
+			<%= input.field(name: "user[password]", id: "user[password]", placeholder: "Enter your password", type: "password") %>
+		<% end %>
+
+		<%= render Components::Input.new do |input| %>
+			<%= input.icon("rectangle-ellipsis") %>
+			<%= input.field(name: "user[password_confirmation]", id: "user[password_confirmation]", placeholder: "Enter your password confirmation", type: "password") %>
+		<% end %>
+
+		<div class="col-span-6 sm:flex sm:items-center sm:gap-4">
+			<div class="inline">
+				<%= form.submit "Create account", class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+			</div>
+		</div>
+	<% end %>
+</div>

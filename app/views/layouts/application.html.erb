@@ -21,8 +21,9 @@
 	<%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
 	<%= javascript_importmap_tags %>
 	<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-	<%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-	<%= javascript_include_tag "https://unpkg.com/lucide@latest" %>
+	<%#= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+	<%= javascript_include_tag "https://unpkg.com/lucide@latest/dist/umd/lucide.js" %>
+
 </head>
 	<body style="background-image: url('<%= asset_path("background.png") %>');">
 		<%= render Components::Nav.new do |nav| %>
@@ -30,17 +31,39 @@
 
 			<% if authenticated? %>
 				<div class="flex items-between">
-					<%= nav.item(href: dashboard_posts_path) { "Discover" } %>
-					<%= nav.item(href: dashboard_posts_path) { "Posts" } %>
-					<%= nav.item(href: dashboard_posts_path) { "Friends" } %>
+					<%= nav.item(href: dashboard_index_path) { "Discover" } %>
+					<%= nav.item(href: dashboard_user_posts_path) { "Posts" } %>
+					<%= nav.item(href: dashboard_user_friend_ship_path) { "Friends" } %>
 				</div>
 
-	      <%= render Components::Button.new(name: "Log out", url: session_path, method: :delete) %>
-				<%#= nav.item() { "Log in"} %>
+				<div class="flex items-between">
+					<%= nav.item_icon(icon: "user-cog", href: edit_dashboard_user_settings_path, data: {turbo_frame: "modal_user_config"}) %>
+
+					<%= button_to "Log out", session_path, method: :delete, class: "button" %>
+				</div>
 			<% else %>
-				<%= render Components::Button.new(name: "Log in", url: new_session_path, method: :get) %>
+				<%= link_to "Log in", new_session_path, class: "button" %>
 			<% end %>
 		<% end %>
+ 		<% if flash[:alert] || flash[:notice] %>
+			<p class="<%= flash[:alert] ? 'text-red-200' : 'flash-green-200' %>"><%= flash[:alert] || flash[:notice] %></p>
+		<% end %>
 		<%= yield %>
+		<%= turbo_frame_tag "modal_user_config" %>
+		<%= javascript_include_tag "https://unpkg.com/lucide@latest/dist/umd/lucide.js" %>
+		<script>
+			lucide.createIcons()
+
+      document.addEventListener('turbo:frame-load', (event) => {
+          lucide.createIcons()
+			})
+
+
+      document.addEventListener('turbo:before-stream-render', (event) => {
+          setTimeout(() => {
+              lucide.createIcons()
+					}, 100)
+      })
+		</script>
 	</body>
 </html>

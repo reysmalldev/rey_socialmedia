@@ -1,0 +1,11 @@
+<%= turbo_stream.replace "like_button" do %>
+	<%= turbo_frame_tag "like_button" do %>
+			<% if @liked %>
+				<%= render Components::Button.new(dashboard_user_posts_like_path, icon: "thumbs-up", icon_fill: 'fill-stone-50', params: {user_post_id: @user_post.id, user_id: Current.user.id, unlike: true}) %>
+				<%= turbo_frame_tag "post_likes", src: dashboard_user_posts_like_counter_path(@user_post.id) %>
+			<% else %>
+				<%= render Components::Button.new(dashboard_user_posts_like_path, icon: "thumbs-up", params: {user_post_id: @user_post.id, user_id: Current.user.id}) %>
+				<%= turbo_frame_tag "post_likes", src: dashboard_user_posts_like_counter_path(@user_post.id) %>
+			<% end %>
+		<% end %>
+<% end %>

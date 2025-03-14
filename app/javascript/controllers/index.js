@@ -5,4 +5,7 @@
 import { application } from "./application"
 
 import HelloController from "./hello_controller"
+import Cropper_controller from "./cropper_controller";
 application.register("hello", HelloController)
+application.register("cropper", Cropper_controller)
+

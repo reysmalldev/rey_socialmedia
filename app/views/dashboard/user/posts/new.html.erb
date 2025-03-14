@@ -1,0 +1,42 @@
+<%= turbo_frame_tag "modal_new_post" do %>
+	<div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+
+		<div class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
+
+		<div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+			<div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+				<%= form_with model: @user_post, url: dashboard_user_posts_path do |f| %>
+					<div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+						<div class="bg-post-wrapper px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+							<div class="sm:flex sm:items-start">
+								<div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+
+									<div class="flex flex-col">
+										<%= f.label "Title", class: "text-post-title text-start" %>
+										<%= render Components::Input.new do |input| %>
+											<%= input.icon("a-large-small") %>
+											<%= input.field(name: "user_post[title]", id: "user_post[username]", placeholder: "Give a title to your new Post!", type: "text") %>
+										<% end %>
+									</div>
+
+									<div class="flex flex-col">
+										<%= f.label "Content", class: "text-post-title text-start" %>
+										<%= render Components::Input.new do |input| %>
+											<%= input.icon("a-large-small") %>
+											<%= input.area(name: "user_post[content]", id: "user_post[content]", placeholder: "Give a text content to your post!", type: "text") %>
+										<% end %>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="bg-post-wrapper px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+							<%= link_to "Cancel", dashboard_user_posts_path, class: "inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto me-1" %>
+							<%= f.submit "Create", class: "mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto me-1" %>
+						</div>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+<% end %>

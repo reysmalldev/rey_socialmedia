@@ -1,0 +1,14 @@
+<%= turbo_frame_tag 'add_friend' do  %>
+	<%= form_with model: @friend_ship, url: dashboard_user_friend_ship_search_url do |f| %>
+		<div class="flex items-center">
+			<%= render Components::Input.new do |input| %>
+				<%= input.icon("user-round-search") %>
+				<%= input.field(name: "user[username]", id: "user[username]", placeholder: "Type username", type: "text") %>
+			<% end %>
+
+			<%= f.submit "Search", class: "button px-3.5 py-2.5 inline-block font-medium cursor-pointer h-fit ms-2" %>
+		</div>
+	<% end %>
+
+	<% turbo_frame_tag "target_friend" %>
+<% end %>

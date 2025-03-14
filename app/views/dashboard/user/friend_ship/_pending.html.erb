@@ -1,0 +1,14 @@
+<% if user.present? %>
+	<span class="flex items-center justify-between border text-white p-2 mt-2">
+		<%= render Components::UserPreview.new(width: 2, without_bg: true, font_size: 'xl', ) do |p| %>
+			<%= p.avatar(user[:avatar]) %>
+			<%= p.text { user[:username] } %>
+		<% end %>
+		<% if user[:follow_actions] %>
+			<div class="flex flex-col">
+				<%= button_to "Accept", dashboard_user_friend_ship_accept_path, class: "button ms-2", params: {'friend_ship[username]' => user[:username], 'friend_ship[action]' => 'accept'} %>
+				<%= button_to "Reject", dashboard_user_friend_ship_accept_path, class: "button ms-2 mt-2", params: {'friend_ship[username]' => user[:username], 'friend_ship[action]' => 'reject'} %>
+			</div>
+		<% end %>
+	</span>
+<% end %>

@@ -1,0 +1,25 @@
+<%= turbo_frame_tag "recent_posts", class: "flex flex-col bg-post-wrapper rounded-sm w-3/5 h-full p-7" do %>
+	<%= render Components::Card.new do |card| %>
+		<%= card.title { @user_post.title } %>
+		<%= card.content { @user_post.content } %>
+
+		<div class="flex items-center justify-between w-full">
+			<%= render Components::UserPreview.new(font_size: "xl") do |p| %>
+				<%= p.avatar @user_post.user.config.avatar %>
+				<%= p.text { @user_post.user.username } %>
+			<% end %>
+
+			<div class="flex flex-col">
+				<%= turbo_frame_tag "like_button", loading: "lazy" do %>
+					<% if @is_liked %>
+						<%= render Components::Button.new(dashboard_user_posts_like_path(@user_post.id), icon: "thumbs-up", icon_fill: 'fill-stone-50', params: {user_id: Current.user.id, unlike: true}) %>
+						<%= turbo_frame_tag "post_likes", src: dashboard_user_posts_like_counter_path(@user_post.id) %>
+					<% else %>
+						<%= render Components::Button.new(dashboard_user_posts_like_path(@user_post.id), icon: "thumbs-up", params: {user_id: Current.user.id}) %>
+						<%= turbo_frame_tag "post_likes", src: dashboard_user_posts_like_counter_path(@user_post.id) %>
+					<% end %>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+<% end %>

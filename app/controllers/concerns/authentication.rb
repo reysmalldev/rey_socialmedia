@@ -16,12 +16,10 @@ module Authentication
 
   private
     def authenticated?
-      puts "session #{session} #{resume_session}"
       resume_session
     end
 
     def require_authentication
-      puts 'requiore'
       resume_session || request_authentication
     end
 
@@ -39,7 +37,6 @@ module Authentication
     end
 
     def after_authentication_url
-      puts "veio aqui"
       session.delete(:return_to_after_authenticating) || dashboard_index_url
     end
 

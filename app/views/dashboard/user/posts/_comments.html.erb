@@ -1,0 +1,19 @@
+<div class="flex flex-col bg-post-wrapper rounded-xl p-5 mt-3">
+	<h1 class="post-title">Comments</h1>
+	<%= form_with model: @new_comment, url: dashboard_user_posts_comment_create_path(@user_post.id) do |f| %>
+		<div class="flex items-center">
+			<%= render Components::Input.new do |input| %>
+				<%= input.icon("message-circle") %>
+				<%= input.field(name: "content", id: "content", placeholder: "Write comment content", type: "text") %>
+			<% end %>
+
+			<%= f.submit "create", class: "button px-3.5 py-2.5 inline-block font-medium cursor-pointer h-fit ms-2" %>
+		</div>
+	<% end %>
+
+	<%= turbo_frame_tag "comments" do %>
+		<% @comments&.each do |c| %>
+				<%= render "dashboard/user/posts/comment/comment", comment: c %>
+		<% end %>
+	<% end %>
+</div>

@@ -1,0 +1,11 @@
+<% if user.present? %>
+	<div class="flex items-center justify-between text-white border rounded-lg p-2 mt-2">
+		<% if user[:avatar].present? %>
+			<%= image_tag user[:avatar], class: "max-w-[100px]" %>
+		<% else %>
+			<i data-lucide="user-round" class="-mt-2 size-15"></i>
+		<% end %>
+		<h3 class="ms-2 text-3xl text-center leading-12"><%= user[:username] %></h3>
+		<%= button_to "Sent", dashboard_user_friend_ship_create_path, class: "button", params: {'user[username]' => user[:username]} %>
+	</div>
+<% end %>

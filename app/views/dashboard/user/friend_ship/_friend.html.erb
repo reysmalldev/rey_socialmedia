@@ -1,0 +1,6 @@
+<% if user.present? %>
+	<%= render Components::UserPreview.new(without_bg: true, selfi: 'end', font_size: 'xl') do |p| %>
+		<%= p.text { user[:username] } %>
+		<%= p.avatar(user[:avatar], circle_size: 'md') %>
+	<% end %>
+<% end %>
