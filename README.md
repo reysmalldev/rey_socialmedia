@@ -29,5 +29,30 @@
     [Todo] - Set up a mailer to send a welcome email when a new user signs up. Use the Letter Opener gem to test it in development mode.
 
     [Todo] - Deploy your App to a hosting provider.
-    
+
     [Todo] - Set up an email provider and start sending real emails.
+
+## Previews
+ ### Posts Page
+ ![Captura de Tela 2025-03-14 às 22 25 30](https://github.com/user-attachments/assets/8b66ce8b-821e-49ce-b44b-9fc8a9a0df64)
+
+ ### Post Show Page
+ ![Captura de Tela 2025-03-14 às 22 30 59](https://github.com/user-attachments/assets/3782969a-0e0a-4305-9305-1bc677abf228)
+
+ ### Friends Page
+ ![Captura de Tela 2025-03-14 às 22 03 35](https://github.com/user-attachments/assets/c8cad648-f8e7-4250-b092-ca9067a8a3a8)
+
+ ### Friends Send request
+ ![Captura de Tela 2025-03-14 às 22 04 08](https://github.com/user-attachments/assets/9fc6d0a3-6aae-44be-bec3-8a9a6835038a)
+
+ ### Friend Pending sent request
+ ![Captura de Tela 2025-03-14 às 22 08 35](https://github.com/user-attachments/assets/f91cf5ea-750a-4198-a0c8-4baed91866e0)
+
+ ### Friend Pending received request
+ <img width="1421" alt="Captura de Tela 2025-03-14 às 22 09 46" src="https://github.com/user-attachments/assets/81f528c9-f37c-461a-aaea-889c4fa9f325" />
+
+ ### Friends
+ ![Captura de Tela 2025-03-14 às 22 15 12](https://github.com/user-attachments/assets/3b1f48c4-52e5-4890-85fb-1de3aec4337b)
+
+ ### Users Page
+ ![Captura de Tela 2025-03-14 às 22 32 09](https://github.com/user-attachments/assets/4c62e7ba-ff5b-41dc-b00e-35afabbf2966)
