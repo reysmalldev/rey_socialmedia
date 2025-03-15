@@ -1,5 +1,5 @@
 <% if user.present? %>
-	<%= render Components::UserPreview.new(without_bg: true, selfi: 'end', font_size: 'xl') do |p| %>
+	<%= render Components::UserPreview.new(border: "border mt-2", without_bg: true, selfi: 'end', font_size: 'xl') do |p| %>
 		<%= p.text { user[:username] } %>
 		<%= p.avatar(user[:avatar], circle_size: 'md') %>
 	<% end %>

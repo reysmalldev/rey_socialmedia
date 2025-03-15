@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class Components::UserPreview < Components::Base
-  def initialize(without_bg: false, without_padding: false, selfi: 'auto', font_size: '3xl', border: nil)
+  def initialize(width: "w-full", without_bg: false, without_padding: false, selfi: 'auto', font_size: 'text-3xl', border: nil)
+    @width = width
     @without_padding = without_padding
     @without_bg = without_bg
     @selfi = selfi
@@ -10,7 +11,7 @@ class Components::UserPreview < Components::Base
   end
 
   def view_template(&)
-    classes = "flex items-center text-white rounded-xl w-full h-full text-white rounded-xl"
+    classes = "flex items-center text-white rounded-xl #{@width} h-full text-white rounded-xl"
 
     unless @without_padding
       classes += ' py-1 px-2'
@@ -28,11 +29,11 @@ class Components::UserPreview < Components::Base
 
   def text(&)
     @is_created = true
-    h4(class: "text-#{@font_size} text-center h-fit", &)
+    h4(class: "#{@font_size} text-center h-fit", &)
   end
 
   def avatar(avatar, circle_size: '2xl', size: 20, &)
-    classes = 'flex items-center justify-center text-wrap relative rounded-full overflow-hidden'
+    classes = 'flex items-center justify-center text-wrap relative'
 
     case circle_size
     when 'md'
@@ -49,7 +50,7 @@ class Components::UserPreview < Components::Base
       classes += ' me-2'
     end
 
-    classes += ' border border-stone-50 p-2' unless avatar&.attached?
+    classes += ' border border-stone-50 rounded-full overflow-hidden p-2' unless avatar&.attached?
 
     div(class: classes.strip) do
       if avatar&.attached?

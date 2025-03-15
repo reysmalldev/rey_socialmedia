@@ -5,7 +5,7 @@
 			<%= p.text { comment.user.username } %>
 		<% end %>
 
-		<span class="text-stone-300 text-nowrap"><%= date_handler(comment.created_at) %></span>
+		<span class="text-stone-300 text-nowrap"><%= date_handler(comment.created_at) %> ago</span>
 	</div>
 	<p class="text-white"><%= comment.content %></p>
 </div>

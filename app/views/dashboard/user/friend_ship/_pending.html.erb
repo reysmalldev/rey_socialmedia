@@ -1,6 +1,6 @@
 <% if user.present? %>
-	<span class="flex items-center justify-between border text-white p-2 mt-2">
-		<%= render Components::UserPreview.new(width: 2, without_bg: true, font_size: 'xl', ) do |p| %>
+	<span class="flex items-center justify-between border rounded-xl text-white p-2 mt-2">
+		<%= render Components::UserPreview.new(without_bg: true, font_size: 'text-xl') do |p| %>
 			<%= p.avatar(user[:avatar]) %>
 			<%= p.text { user[:username] } %>
 		<% end %>

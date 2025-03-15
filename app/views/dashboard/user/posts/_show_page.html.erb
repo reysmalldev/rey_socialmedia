@@ -4,7 +4,7 @@
 		<%= card.content { @user_post.content } %>
 
 		<div class="flex items-center justify-between w-full">
-			<%= render Components::UserPreview.new(font_size: "xl") do |p| %>
+			<%= render Components::UserPreview.new(width: "w-fit", font_size: "xl") do |p| %>
 				<%= p.avatar @user_post.user.config.avatar %>
 				<%= p.text { @user_post.user.username } %>
 			<% end %>

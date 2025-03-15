@@ -1,7 +1,6 @@
 module ApplicationHelper
   def date_handler(date)
     if date.present?
-      if date.day.to_i == Date.today.day.to_i
         distance = ActiveSupport::Duration.build((Time.now - date.time).to_i).parts
 
         unit = distance.map { |k, _| k }[0]
@@ -10,7 +9,6 @@ module ApplicationHelper
         puts "o text"
         puts text
         text
-      end
     end
   end
 end
