@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
-  has_one :config
+  has_one :config, dependent: :destroy
   has_many :posts
   has_many :friend_ships
   has_many :received_friend_ships, class_name: "User::FriendShip", foreign_key: "target_user_id"
@@ -29,8 +29,8 @@ class User < ApplicationRecord
     self.friend_ships.where(acceptance: true).map(&:target_user) + self.received_friend_ships.where(acceptance: true).map(&:user)
   end
 
-  def are_friend(user)
-    friends.find { |f| f.id == user.id }
+  def are_friend?(user)
+    friends.find { |f| f.id == user&.id } ? true : false
   end
 
   def has_pending_request_from(user)

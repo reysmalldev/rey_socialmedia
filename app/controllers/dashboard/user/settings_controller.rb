@@ -2,10 +2,8 @@ class Dashboard::User::SettingsController < ApplicationController
   def edit
     @user = Current.user
   end
+
   def update
-    puts "all params: #{params}"
-    puts "afafa #{settings_params}"
-    puts "email: #{settings_params[:email_address]}, username: #{settings_params[:username]}"
     updated_user = Current.user.update(user_params)
 
     if updated_user && Current.user.config.update(config_params)
@@ -14,7 +12,8 @@ class Dashboard::User::SettingsController < ApplicationController
       flash[:error] = "Did no updated successfully."
     end
 
-    redirect_to request.referer
+    redirect_to root_path
+
   end
 
   private
@@ -28,6 +27,6 @@ class Dashboard::User::SettingsController < ApplicationController
   end
 
   def config_params
-    {username: settings_params[:username], avatar: settings_params[:avatar]}
+    {username: settings_params[:username], avatar: settings_params[:avatar]}.compact_blank!
   end
 end

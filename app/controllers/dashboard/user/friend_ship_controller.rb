@@ -12,11 +12,11 @@ class Dashboard::User::FriendShipController < ApplicationController
   def create
     search_user_without_response(false)
 
-
-
     respond_to do |format|
       if @user.blank?
         return format.turbo_stream { render turbo_stream: turbo_stream.append('add_friend', partial: 'not_found') }
+      elsif Current.user.id == @user.id
+        return format.turbo_stream { render turbo_stream: turbo_stream.append('add_friend', partial: 'self_friend') }
       elsif Current.user.are_friend(@user)
         return format.json { render json: { code: 201, message: "User are already your Friend" }, status: 404 }
       end
@@ -37,19 +37,22 @@ class Dashboard::User::FriendShipController < ApplicationController
     search_user_without_response
 
     respond_to do |format|
-      if @user_hash.present?
-        format.turbo_stream
+      if @user.present?
+        if @user.id == Current.user.id
+          format.turbo_stream { render turbo_stream: turbo_stream.update('target_friend', partial: 'self_friend') }
+        elsif Current.user.are_friend?(@user)
+          format.turbo_stream { render turbo_stream: turbo_stream.update('target_friend', partial: 'already_friend') }
+        else
+          format.turbo_stream
+        end
       else
-        format.html { redirect_to dashboard_user_friend_ship_path }
-        format.json { render json: { code: 404, message: "User not found" }, status: 404 }
+        format.turbo_stream { render turbo_stream: turbo_stream.update('target_friend', partial: 'not_found') }
       end
     end
   end
 
   def accept_friendship
-    puts "teste #{friend_ship_accept_params}"
     if friend_ship_accept_params.present?
-      puts "fried"
       r = Current.user.received_friend_ships.find_by(user_id: User.find_by_username(friend_ship_accept_params[:username]).id)
 
       if friend_ship_accept_params[:action] == "accept"
@@ -83,9 +86,9 @@ class Dashboard::User::FriendShipController < ApplicationController
   end
 
   def set_important_data
-    @friends = Current.user.friends.map(&:as_json)
+    @friends           = Current.user.friends.map(&:as_json)
     @received_requests = Current.user.received_friend_ships.where(acceptance: nil).map { |f| f.user.as_json.merge(follow_actions: true) }
-    @requested_users = Current.user.friend_ships.where(acceptance: nil).map { |f| f.target_user.as_json }
+    @requested_users   = Current.user.friend_ships.where(acceptance: nil).map { |f| f.target_user.as_json }
   end
 
   def search_user_without_response(follow_actions = true)

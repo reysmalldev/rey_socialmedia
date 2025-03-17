@@ -1,5 +1,6 @@
 class RegistrationController < ApplicationController
-  allow_unauthenticated_access only: %i[index create ]
+  allow_unauthenticated_access only: %i[ index create ]
+
   def index
     @user = User.new
   end
@@ -11,6 +12,7 @@ class RegistrationController < ApplicationController
       config = User::Config.create(user_id: @user.id, username: registration_params[:username])
 
       if config.save
+        UserMailer.welcome_email.deliver_now!
         redirect_to root_path, notice: "Successfully created an account."
       else
         @user.destroy! if @user.persisted?

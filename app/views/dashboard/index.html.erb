@@ -1,8 +1,8 @@
-<div class="flex flex-col">
+<div class="flex flex-col p-5">
   <h1 class="post-title">RailsSocialMedia Users</h1>
   <% @users.each do |u| %>
-    <div class="h-20 mb-2 mx-3 w-fit">
-      <%= render Components::UserPreview.new() do |p| %>
+    <div class="bg-post-wrapper rounded-xl w-full h-fit mb-2 px-1 py-3">
+      <%= render Components::UserPreview.new(without_bg: true) do |p| %>
         <%= p.avatar u.config.avatar %>
         <%= p.text { u.username } %>
       <% end %>

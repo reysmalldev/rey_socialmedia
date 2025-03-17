@@ -11,6 +11,8 @@ export default class extends Controller {
   }
 
   handleAvatarUpload(event) {
+    this.hasFileAttached = true;
+
     let file = event.target.files[0];
     let url;
 
@@ -25,7 +27,7 @@ export default class extends Controller {
 
     setTimeout(() => {
       this.croppie = new Croppie(this.previewTarget, {
-        viewport: { width: 100, height: 100, type: "circle"  },
+        viewport: { width: 200, height: 200, type: "circle"  },
         boundary: { width: 200, height: 200 },
         showZoomer: false,
       })
@@ -43,15 +45,17 @@ export default class extends Controller {
 
 
   postData(event) {
-    event.preventDefault();
-    this.croppie.result('blob').then((blob) => {
-      const croppedFile = new File([blob], "cropped_image.jpg", { type: "image/jpeg" });
+    if (this.hasFileAttached) {
+      event.preventDefault();
+      this.croppie.result('blob').then((blob) => {
+        const croppedFile = new File([blob], "cropped_image.jpg", { type: "image/jpeg" });
 
-      const dataTransfer = new DataTransfer();
-      dataTransfer.items.add(croppedFile);
-      this.avatarTarget.files = dataTransfer.files;
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(croppedFile);
+        this.avatarTarget.files = dataTransfer.files;
 
-      event.target.submit()
-    })
+        event.target.submit()
+      })
+    }
   }
 }
