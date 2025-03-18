@@ -13,22 +13,11 @@ class Dashboard::User::FriendShipController < ApplicationController
     search_user_without_response(false)
 
     respond_to do |format|
-      if @user.blank?
-        return format.turbo_stream { render turbo_stream: turbo_stream.append('add_friend', partial: 'not_found') }
-      elsif Current.user.id == @user.id
-        return format.turbo_stream { render turbo_stream: turbo_stream.append('add_friend', partial: 'self_friend') }
-      elsif Current.user.are_friend?(@user)
-        return format.json { render json: { code: 201, message: "User are already your Friend" }, status: 404 }
-      end
-
       if friend_ships(@user.id).blank?
         friend_ship_request = Current.user.friend_ships.new(user_id: Current.user.id, target_user_id: @user.id)
 
-        if friend_ship_request.save
-          format.html { redirect_to dashboard_user_friend_ship_path }
-        else
-          format.json { render json: { code: 404, message: "User not found" }, status: 404 }
-        end
+        format.turbo_stream
+        format.html
       end
     end
   end
@@ -62,8 +51,7 @@ class Dashboard::User::FriendShipController < ApplicationController
       end
 
       if r.save
-        flash[:notice] = "Friend Accepted Successfully"
-        redirect_to dashboard_user_friend_ship_path
+        format.turbo_stream { render turbo_stream: turbo_stream.update("friendship_#{@user.id}", partial: 'is_your_friend') }
       else
         flash[:errors] = r.errors.full_messages
         redirect_to dashboard_user_friend_ship_path

@@ -19,7 +19,7 @@
           <i data-lucide="user-round-check" class="ms-2"></i>
         </div>
       <% elsif Current.user.has_pending_request_from?(u) %>
-        <%= turbo_frame_tag "pending_request_#{u.id}", class: "flex flex-col" do %>
+        <%= turbo_frame_tag "friendship_#{u.id}", class: "flex flex-col" do %>
           <%= button_to "Accept", dashboard_user_friend_ship_accept_path, class: "button ms-2", params: {'friend_ship[username]' => u.username, 'friend_ship[action]' => 'accept'} %>
           <%= button_to "Reject", dashboard_user_friend_ship_accept_path, class: "button ms-2 mt-2", params: {'friend_ship[username]' => u.username, 'friend_ship[action]' => 'reject'} %>
         <% end %>
@@ -29,8 +29,8 @@
            <i data-lucide="user-round-check" class="ms-2"></i>
           </div>
       <% else %>
-        <%= turbo_frame_tag "request_friendship_#{u.id}", class: "h-fit" do %>
-          <%= button_to "Request Friendship", dashboard_user_friend_ship_create_path, class: "button", params: {'user[username]' => u.username} %>
+        <%= turbo_frame_tag "friendship_#{u.id}", class: "h-fit" do %>
+          <%= button_to "Request Friendship", dashboard_user_friend_ship_create_path, class: "button", params: {'user[username]' => u.username}, local: true %>
         <% end %>
       <% end %>
     </div>
