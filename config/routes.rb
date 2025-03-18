@@ -29,7 +29,8 @@ Rails.application.routes.draw do
       end
 
       # resources :posts
-      get "/recent_posts", to: "posts#posts", as: :recent_posts
+      get "/",           to: "show",                as: :show
+      get "/recent_posts",  to: "posts#posts",         as: :recent_posts
       get "/friends_posts", to: "posts#friends_posts", as: :friends_posts
 
       namespace :posts do

@@ -1,10 +1,37 @@
 <div class="flex flex-col p-5">
-  <h1 class="post-title">RailsSocialMedia Users</h1>
+  <h1 class="post-title mb-2">RailsSocialMedia Users</h1>
   <% @users.each do |u| %>
-    <div class="bg-post-wrapper rounded-xl w-full h-fit mb-2 px-1 py-3">
-      <%= render Components::UserPreview.new(without_bg: true) do |p| %>
-        <%= p.avatar u.config.avatar %>
-        <%= p.text { u.username } %>
+    <div class="flex justify-between items-center bg-post-wrapper rounded-xl cursor-pointer w-full h-fit mb-2 px-4 py-3">
+      <%= button_to dashboard_user_show_path, class: "cursor-pointer p-0 m-0", method: :get, params: { id: u.id } do %>
+        <%= render Components::UserPreview.new(without_bg: true, without_padding: true) do |p| %>
+          <%= p.avatar u.config.avatar %>
+          <%= p.text { u.username } %>
+        <% end %>
+      <% end %>
+      <% if u.are_friend?(Current.user) %>
+        <div class="flex text-white items-center">
+          Is your Friend
+          <i data-lucide="handshake" class="ms-2"></i>
+        </div>
+      <% elsif u.id == Current.user.id %>
+        <div class="flex text-white items-center">
+          This is you
+          <i data-lucide="user-round-check" class="ms-2"></i>
+        </div>
+      <% elsif Current.user.has_pending_request_from?(u) %>
+        <%= turbo_frame_tag "pending_request_#{u.id}", class: "flex flex-col" do %>
+          <%= button_to "Accept", dashboard_user_friend_ship_accept_path, class: "button ms-2", params: {'friend_ship[username]' => u.username, 'friend_ship[action]' => 'accept'} %>
+          <%= button_to "Reject", dashboard_user_friend_ship_accept_path, class: "button ms-2 mt-2", params: {'friend_ship[username]' => u.username, 'friend_ship[action]' => 'reject'} %>
+        <% end %>
+      <% elsif u.has_pending_request_from?(Current.user) %>
+          <div class="flex text-white items-center">
+            You have sent a friend request to this user
+           <i data-lucide="user-round-check" class="ms-2"></i>
+          </div>
+      <% else %>
+        <%= turbo_frame_tag "request_friendship_#{u.id}", class: "h-fit" do %>
+          <%= button_to "Request Friendship", dashboard_user_friend_ship_create_path, class: "button", params: {'user[username]' => u.username} %>
+        <% end %>
       <% end %>
     </div>
   <% end %>

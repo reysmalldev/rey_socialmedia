@@ -33,8 +33,8 @@ class User < ApplicationRecord
     friends.find { |f| f.id == user&.id } ? true : false
   end
 
-  def has_pending_request_from(user)
-    self.received_friend_ships.where(user_id: user.id, acceptance: nil)
+  def has_pending_request_from?(user)
+    self.received_friend_ships.where(user_id: user.id, acceptance: nil)&.size&.positive?
   end
 
   after_create do |user|

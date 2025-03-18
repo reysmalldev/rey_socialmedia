@@ -17,7 +17,7 @@ class Dashboard::User::FriendShipController < ApplicationController
         return format.turbo_stream { render turbo_stream: turbo_stream.append('add_friend', partial: 'not_found') }
       elsif Current.user.id == @user.id
         return format.turbo_stream { render turbo_stream: turbo_stream.append('add_friend', partial: 'self_friend') }
-      elsif Current.user.are_friend(@user)
+      elsif Current.user.are_friend?(@user)
         return format.json { render json: { code: 201, message: "User are already your Friend" }, status: 404 }
       end
 
@@ -25,7 +25,7 @@ class Dashboard::User::FriendShipController < ApplicationController
         friend_ship_request = Current.user.friend_ships.new(user_id: Current.user.id, target_user_id: @user.id)
 
         if friend_ship_request.save
-          return format.html { redirect_to dashboard_user_friend_ship_path }
+          format.html { redirect_to dashboard_user_friend_ship_path }
         else
           format.json { render json: { code: 404, message: "User not found" }, status: 404 }
         end

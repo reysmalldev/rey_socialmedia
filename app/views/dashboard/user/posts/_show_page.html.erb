@@ -1,4 +1,8 @@
-<%= turbo_frame_tag "recent_posts", class: "flex flex-col bg-post-wrapper rounded-sm w-3/5 h-full p-7" do %>
+<%= turbo_frame_tag "recent_posts", class: "flex flex-col bg-post-wrapper rounded-sm w-3/5 h-full p-5" do %>
+	<%= link_to request.referer, class: "flex text-white border rounded-xl my-2 px-1 py-2 w-fit" do %>
+		<i data-lucide="undo-2" class="me-2"></i>
+		Back to Posts
+	<% end %>
 	<%= render Components::Card.new do |card| %>
 		<%= card.title { @user_post.title } %>
 		<%= card.content { @user_post.content } %>

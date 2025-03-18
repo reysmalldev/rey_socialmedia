@@ -22,15 +22,15 @@
     [Ok] - Users can create a profile with a profile picture. You may be able to get the profile picture when users sign in using OmniAuth. If this isn’t the case you can use Gravatar to generate the photo.
         Done with ActiveStorage
 
-    [Partial] - A user’s profile page should contain their profile information, profile photo, and posts.
+    [Ok] - A user’s profile page should contain their profile information, profile photo, and posts.
 
-    [Partial] - There should be an index page for users, which shows all users and buttons for sending follow requests to users the user is not already following or have a pending request.
+    [Ok - but improving UX] - There should be an index page for users, which shows all users and buttons for sending follow requests to users the user is not already following or have a pending request.
 
-    [Todo] - Set up a mailer to send a welcome email when a new user signs up. Use the Letter Opener gem to test it in development mode.
+    [Ok] - Set up a mailer to send a welcome email when a new user signs up. Use the Letter Opener gem to test it in development mode.
 
     [Todo] - Deploy your App to a hosting provider.
 
-    [Todo] - Set up an email provider and start sending real emails.
+    [Ok] - Set up an email provider and start sending real emails.
 
 ## Previews
  ### Posts Page

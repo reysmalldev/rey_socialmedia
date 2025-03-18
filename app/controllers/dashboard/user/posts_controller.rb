@@ -61,7 +61,7 @@ class Dashboard::User::PostsController < ApplicationController
   end
 
   def posts
-    @posts = Current.user.posts.sort_by(&:created_at).reverse[0..3]
+    @posts = (User.find_by(id: params.permit(:id)[:id]) || Current.user).posts.sort_by(&:created_at).reverse[0..3]
   end
 
   def friends_posts
