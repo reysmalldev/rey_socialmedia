@@ -36,4 +36,8 @@ class User < ApplicationRecord
   def has_pending_request_from(user)
     self.received_friend_ships.where(user_id: user.id, acceptance: nil)
   end
+
+  after_create do |user|
+    UserMailer.welcome_email(user).deliver_now!
+  end
 end

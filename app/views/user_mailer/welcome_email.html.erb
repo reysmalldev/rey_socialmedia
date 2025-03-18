@@ -1,0 +1,10 @@
+<div>
+  <h1 style="background: linear-gradient(#ae67fa, #f49867; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Welcome to RailsSocialMedia</h1>
+  <p>
+    Hi <%= @user[:username] %>,
+  </p>
+  <p>
+    Welcome to RailsSocialMedia! We're glad you're here. You can now start making friends and sharing posts with the community.
+  </p>
+  <%= link_to "Explore", dashboard_index_url, style: "background: linear-gradient(#84EEF5, #C584F5; padding: 0.5rem 1rem 0.5rem 1rem; border-radius: 0.5rem; text-decoration: none; font-weight: bold;" %>
+</div>
