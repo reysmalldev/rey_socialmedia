@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default reply_to: 'Infosimples <suporte@infosimples.com.br>'
+  default reply_to: 'RailsSocialMedia <guisousa.inacio@gmail.com>'
 
   def welcome_email(user)
     @user = (user || Current.user).as_json
