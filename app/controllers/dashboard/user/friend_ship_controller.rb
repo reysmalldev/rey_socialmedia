@@ -14,11 +14,12 @@ class Dashboard::User::FriendShipController < ApplicationController
 
     respond_to do |format|
       if friend_ships(@user.id).blank?
-        friend_ship_request = Current.user.friend_ships.new(user_id: Current.user.id, target_user_id: @user.id)
-
-        format.turbo_stream
-        format.html
+        @saved = Current.user.friend_ships.create(user_id: Current.user.id, target_user_id: @user.id)
+      elsif friend_ships(@user.id)
       end
+
+      format.turbo_stream
+      format.html
     end
   end
 

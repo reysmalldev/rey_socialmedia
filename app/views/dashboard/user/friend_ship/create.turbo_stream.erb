@@ -4,4 +4,4 @@
   <%= turbo_stream.append 'add_friend', partial: 'self_friend' %>
 <% end %>
 
-<%= turbo_stream.update("friendship_#{@user.id}", partial: 'request_sent') if @saved %>
+<%= turbo_stream.update("friendship_#{@user.id}", partial: 'already_sent_request') if @saved %>

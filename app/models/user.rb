@@ -37,6 +37,10 @@ class User < ApplicationRecord
     self.received_friend_ships.where(user_id: user.id, acceptance: nil)&.size&.positive?
   end
 
+  def has_reject_request_from?(user)
+    self.received_friend_ships.where(user_id: user.id, acceptance: false)&.size&.positive?
+  end
+
   after_create do |user|
     UserMailer.welcome_email(user).deliver_now!
   end
