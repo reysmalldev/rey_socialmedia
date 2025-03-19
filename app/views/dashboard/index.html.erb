@@ -1,14 +1,14 @@
 <div class="flex flex-col p-5">
   <h1 class="post-title mb-2">RailsSocialMedia Users</h1>
   <% @users.each do |u| %>
-      <%= turbo_stream_from u %>
-      <%= button_to dashboard_user_show_path, class: "flex justify-between items-center bg-post-wrapper rounded-xl cursor-pointer text-nowrap w-full h-fit cursor-pointer p-0 m-0 mb-2 px-4 py-3", method: :get, params: { id: u.id } do %>
+    <div class="flex justify-between items-center bg-post-wrapper rounded-xl cursor-pointer w-full h-fit mb-2 px-4 py-3">
+      <%= button_to dashboard_user_show_path, class: "cursor-pointer p-0 m-0", method: :get, params: { id: u.id } do %>
         <%= render Components::UserPreview.new(without_bg: true, without_padding: true) do |p| %>
           <%= p.avatar u.config.avatar %>
           <%= p.text { u.username } %>
         <% end %>
-
-        <% if u.are_friend?(Current.user) %>
+      <% end %>
+      <% if u.are_friend?(Current.user) %>
         <div class="flex text-white items-center">
           Is your Friend
           <i data-lucide="handshake" class="ms-2"></i>
@@ -24,17 +24,19 @@
           <%= button_to "Reject", dashboard_user_friend_ship_accept_path, class: "button ms-2 mt-2", params: {'friend_ship[username]' => u.username, 'friend_ship[action]' => 'reject'} %>
         <% end %>
       <% elsif u.has_pending_request_from?(Current.user) %>
-          <div class="flex text-white items-center">
-            You have sent a friend request to this user
-           <i data-lucide="user-round-check" class="ms-2"></i>
-          </div>
+        <div class="flex text-white items-center">
+          You have sent a friend request to this user
+          <i data-lucide="user-round-check" class="ms-2"></i>
+        </div>
       <% elsif u.has_reject_request_from?(Current.user) %>
-          <%= render partial: "dashboard/user/friend_ship/has_reject_your_friendship" %>
+        <%= render partial: "dashboard/user/friend_ship/has_reject_your_friendship" %>
+      <% elsif Current.user.has_reject_request_from?(u) %>
+        <%= render partial: "dashboard/user/friend_ship/has_reject_your_friendship" %>
       <% else %>
         <%= turbo_frame_tag "friendship_#{u.id}", class: "h-fit" do %>
           <%= button_to "Request Friendship", dashboard_user_friend_ship_create_path, class: "button", params: {'user[username]' => u.username}, local: true %>
         <% end %>
       <% end %>
-      <% end %>
+    </div>
   <% end %>
 </div>

@@ -5,5 +5,5 @@ class User::Post < ApplicationRecord
   has_many         :comments, class_name: 'User::Post::Comment', foreign_key: 'user_post_id', dependent: :destroy
   has_one_attached :image_poster
 
-  broadcasts_refreshes_to :user
+  broadcasts_refreshes
 end

@@ -1,21 +1,20 @@
 <%= turbo_frame_tag "friend_posts", class: "flex flex-col bg-post-wrapper" do %>
 	<h2 class="post-title">Friends Posts</h2>
-	<% if @friend_posts.size.positive? %>
-		<% @friend_posts.each do |post| %>
-			<div class="py-3">
-				<%= render Components::Card.new(href: dashboard_user_posts_show_path(post.id), target: "recent_posts") do |card| %>
-					<%= card.title { post.title } %>
-					<%= card.content { post.content } %>
-					<div class="w-fit self-end">
-						<%= render Components::UserPreview.new( selfi: 'end', font_size: 'xl') do |p| %>
-							<%= p.text { "By: #{post.user.username}" } %>
-							<%= p.avatar(post.user.config.avatar, circle_size: 'md') %>
-						<% end %>
-					</div>
-				<% end %>
-			</div>
-		<% end %>
-		<% else %>
+	<% Current.user.friends.map(&:posts).flatten&.each do |post| %>
+		<div class="py-3">
+			<%= render Components::Card.new(href: dashboard_user_posts_show_path(post.id), target: "recent_posts") do |card| %>
+				<%= card.title { post.title } %>
+				<%= card.content { post.content } %>
+				<div class="w-fit self-end">
+					<%= render Components::UserPreview.new( selfi: 'end', font_size: 'xl') do |p| %>
+						<%= p.text { "By: #{post.user.username}" } %>
+						<%= p.avatar(post.user.config.avatar, circle_size: 'md') %>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
+	<% unless @friend_posts.any? %>
 		<h2 class="text-white">Friends did not has posts!</h2>
 	<% end %>
 <% end %>

@@ -1,0 +1,7 @@
+<% if @r.acceptance %>
+  <% partial_name = 'is_your_friend' %>
+<% else %>
+  <% partial_name = 'you_rejected_friendship' %>
+<% end %>
+
+<%= turbo_stream.update("friendship_#{@user_who_requested.id}", partial: partial_name) %>

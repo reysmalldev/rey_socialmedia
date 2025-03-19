@@ -43,16 +43,20 @@ class Dashboard::User::FriendShipController < ApplicationController
 
   def accept_friendship
     if friend_ship_accept_params.present?
-      r = Current.user.received_friend_ships.find_by(user_id: User.find_by_username(friend_ship_accept_params[:username]).id)
+      @user_who_requested = User.find_by_username(friend_ship_accept_params[:username])
+
+      @r = Current.user.received_friend_ships.find_by(user_id: @user_who_requested.id)
 
       if friend_ship_accept_params[:action] == "accept"
-        r.acceptance = true
+        @r.acceptance = true
       else
-        r.acceptance = false
+        @r.acceptance = false
       end
 
-      if r.save
-        format.turbo_stream { render turbo_stream: turbo_stream.update("friendship_#{@user.id}", partial: 'is_your_friend') }
+      if @r.save
+        respond_to do |format|
+          format.turbo_stream
+        end
       else
         flash[:errors] = r.errors.full_messages
         redirect_to dashboard_user_friend_ship_path
