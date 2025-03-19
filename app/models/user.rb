@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
+  broadcasts_refreshes
+
   def self.find_by_username(username = nil)
     User::Config.find_by(username: username)&.user
   end

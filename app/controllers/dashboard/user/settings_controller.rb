@@ -13,7 +13,6 @@ class Dashboard::User::SettingsController < ApplicationController
     end
 
     redirect_to root_path
-
   end
 
   private

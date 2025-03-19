@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "recent_posts", class: "flex flex-col bg-post-wrapper rounded-sm w-3/5 h-full p-5" do %>
-	<%= link_to request.referer, class: "flex text-white border rounded-xl my-2 px-1 py-2 w-fit" do %>
+	<%= link_to request.referer, class: "flex text-white border rounded-xl my-2 px-1 py-2 w-fit", data: { turbo_frame: "_top" } do %>
 		<i data-lucide="undo-2" class="me-2"></i>
 		Back to Posts
 	<% end %>

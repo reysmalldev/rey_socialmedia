@@ -10,12 +10,11 @@
 						<div class="bg-post-wrapper px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
 							<div class="sm:flex sm:items-start">
 								<div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left" id="teste">
-
 									<div class="flex flex-col">
 										<%= f.label "Username", class: "text-post-title text-start" %>
 										<%= render Components::Input.new(form: f) do |input| %>
 											<%= input.icon("square-pen") %>
-											<%= input.field(name: "username", value: @user.username, placeholder: "Your e-mail", valud: @user.username, type: "text") %>
+											<%= input.field(name: "username", value: @user.username, placeholder: "Your username", value: @user.username, type: "text") %>
 										<% end %>
 									</div>
 

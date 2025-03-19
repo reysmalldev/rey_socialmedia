@@ -1,0 +1,4 @@
+<%= turbo_stream.update "posts", partial: "posts", locals: { posts: Current.user.posts.limit(4) } %>
+
+# Update the modal with a empty turbo stream
+<%= turbo_stream.update "modal_new_post" %>

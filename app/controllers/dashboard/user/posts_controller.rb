@@ -28,8 +28,7 @@ class Dashboard::User::PostsController < ApplicationController
 
     respond_to do |format|
       if @user_post.save
-        format.html { redirect_to dashboard_user_posts_path, notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @user_post }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @user_post.errors, status: :unprocessable_entity }

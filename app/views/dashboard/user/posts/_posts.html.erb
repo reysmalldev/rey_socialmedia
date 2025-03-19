@@ -1,0 +1,8 @@
+<% posts.each_with_index do |post, post_i| %>
+  <div class="w-1/2 h-1/2 py-3 <%= post_i % 2 == 0  ? 'pr-2' : 'pl-2' %>">
+    <%= render Components::Card.new(href: dashboard_user_posts_show_path(post.id), target: "recent_posts") do |card| %>
+      <%= card.title 	 { post.title } %>
+      <%= card.content { post.content } %>
+    <% end %>
+  </div>
+<% end %>
