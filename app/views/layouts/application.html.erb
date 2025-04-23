@@ -24,6 +24,7 @@
 	<%#= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 	<%= javascript_include_tag "https://unpkg.com/lucide@latest/dist/umd/lucide.js" %>
 	<%= turbo_refreshes_with method: :morph, scroll: :preserve  %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 </head>
 	<body style="background-image: url('<%= asset_path("background.png") %>');">
 		<%= render Components::Nav.new do |nav| %>

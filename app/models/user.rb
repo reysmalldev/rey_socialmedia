@@ -10,14 +10,16 @@ class User < ApplicationRecord
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
+  after_create :send_welcome_email, if: :persisted?
+
   def self.find_by_username(username = nil)
     User::Config.find_by(username: username)&.user
   end
 
   def as_json(options = {})
-    hash_user = super(options.merge(only: [:id, :email_address]))
-    hash_user[:avatar] = self.config.avatar
-    hash_user[:username] = self.config.username
+    hash_user = super(options.merge(only: [ :id, :email_address ]))
+    hash_user[:avatar]   = self&.config&.avatar
+    hash_user[:username] = self&.config&.username
     hash_user.with_indifferent_access
   end
 
@@ -37,7 +39,7 @@ class User < ApplicationRecord
     self.received_friend_ships.where(user_id: user.id, acceptance: nil)&.size&.positive?
   end
 
-  after_create do |user|
-    UserMailer.welcome_email(user).deliver_now!
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver_late
   end
 end

@@ -14,11 +14,12 @@ class RegistrationController < ApplicationController
       if config.save
         redirect_to root_path, notice: "Successfully created an account."
       else
-        @user.destroy! if @user.persisted?
         flash[:errors] = config.errors.full_messages
         redirect_to registration_index_path
       end
     else
+      puts "error"
+      puts @user.errors.full_messages
       flash[:errors] = @user.errors.full_messages
       redirect_to registration_index_path, errors: @user.errors.full_messages
     end

@@ -4,8 +4,8 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-import Cropper_controller from "./cropper_controller";
-application.register("hello", HelloController)
-application.register("cropper", Cropper_controller)
+import CropperController from "./cropper_controller"
+application.register("cropper", CropperController)
 
+import HelloController from "./hello_controller"
+application.register("hello", HelloController)

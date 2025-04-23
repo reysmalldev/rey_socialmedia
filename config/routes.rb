@@ -1,4 +1,8 @@
+require "sidekiq/web" # require the web UI
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => "/sidekiq"
+
   resource :session
   resources :passwords, param: :token
   resources :registration, only: %w[index create]

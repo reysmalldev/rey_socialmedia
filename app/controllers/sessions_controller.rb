@@ -11,8 +11,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email_address: params[:login]) || User::Config.find_by(username: params[:login])&.user
-    puts sessions_params
-    puts "user: #{user.inspect}"
+
     if user&.authenticate(sessions_params[:password])
       start_new_session_for user
       redirect_to after_authentication_url

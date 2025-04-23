@@ -11,9 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2025_03_12_134121) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
-
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -43,7 +40,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_134121) do
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.string "ip_address"
     t.string "user_agent"
     t.datetime "created_at", null: false
@@ -53,7 +50,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_134121) do
 
   create_table "user_configs", force: :cascade do |t|
     t.string "username"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_user_configs_on_user_id"
@@ -61,8 +58,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_134121) do
 
   create_table "user_friend_ships", force: :cascade do |t|
     t.boolean "acceptance"
-    t.bigint "user_id", null: false
-    t.bigint "target_user_id", null: false
+    t.integer "user_id", null: false
+    t.integer "target_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["target_user_id"], name: "index_user_friend_ships_on_target_user_id"
@@ -70,8 +67,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_134121) do
   end
 
   create_table "user_post_comments", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "user_post_id", null: false
+    t.integer "user_id", null: false
+    t.integer "user_post_id", null: false
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -81,8 +78,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_134121) do
 
   create_table "user_post_likes", force: :cascade do |t|
     t.string "like_type"
-    t.bigint "user_post_id", null: false
-    t.bigint "user_id", null: false
+    t.integer "user_post_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_user_post_likes_on_user_id"
@@ -92,7 +89,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_12_134121) do
   create_table "user_posts", force: :cascade do |t|
     t.string "title"
     t.string "content"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_user_posts_on_user_id"
